@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h> // for rand()
+
+// Function prototype
+void Hunerler(float itemPrice, float* donationTotal, float* profitTotal);
+
+int main(void)
+{
+    // Variable declarations
+    float aRandomNumber;
+    float donation = 0;
+    float profit = 0;
+    float* donptr = &donation;
+    float* proptr = &profit;
+
+    // Open file for writing
+    FILE* don = fopen("donations.txt", "w");
+
+    for (int i = 0; i < 50; i++) {
+        aRandomNumber = rand() % 2000;
+        aRandomNumber = aRandomNumber / 100.0f;
+
+        printf("Item %d is %.2f\n", i + 1, aRandomNumber);
+        fprintf(don, "Item %d is %.2f\n", i + 1, aRandomNumber);
+
+        Hunerler(aRandomNumber, donptr, proptr);
+    }
+
+    printf("Profit is %.2f\nDonation is %.2f\n", profit, donation);
+    fprintf(don, "Profit is %.2f\nDonation is %.2f\n", profit, donation);
+
+    fclose(don);
+
+    return 0;
+}
+
+// Function
+void Hunerler(float itemPrice, float* donationTotal, float* profitTotal)
+{
+    int localprof = 0;
+
+    // Manual integer extraction without casting or math.h
+    while (itemPrice >= 1.0f) {
+        itemPrice -= 1.0f;
+        localprof += 1;
+    }
+
+    *profitTotal += localprof;
+    *donationTotal += itemPrice;
+}
