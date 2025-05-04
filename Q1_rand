@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+
+int main( void )
+{
+//variable declarations
+float aRandomNumber ;
+for( int i=0; i<50; i++ )
+{ //Generates a random number between 1 and 1000
+aRandomNumber = rand()%2000;
+printf("Rand modulo 1000 gives gives %.2f \n", aRandomNumber);
+aRandomNumber = aRandomNumber /100;
+printf("We divide by 100 to get %.2f \n \n", aRandomNumber);
+}
+return 0;
+} /* end function main */
